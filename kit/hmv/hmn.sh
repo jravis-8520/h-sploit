@@ -40,9 +40,15 @@ echo -e "
 	┃                                                      ┃
 	╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 "
+center() {
+  termwidth=$(stty size | cut -d" " -f2)
+  padding="$(printf '%0.1s' :{1..500})"
+  printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+}
 sleep 5.0
 if [ -d $HOME/metasploit-framework ];
 then
+echo -e "$red"
 center "CHEKING OLD METASPLOIT"
 echo -e "\e[34mREMOVING METASPLOIT.....WAIT\e[0m"
 find . -type d -name "metasploit-*" -exec rm -rf "{}" \; >/dev/null 2>&1
@@ -54,14 +60,14 @@ echo
 fi
 if [[ $arc = "arm" ]];
 then
-echo -e "\033[92m"
+echo -e "$red"
 center "INSTALLING REQUIREED PACKAGES"
 echo -e "\e[34mPACKAGES BEING INSTALLED WAIT....\e[0m"
 apt remove -y ruby >/dev/null 2>&1
 apt install -y libiconv zlib autoconf bison clang coreutils curl findutils git apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make libgrpc termux-tools ncurses-utils ncurses unzip zip tar termux-elf-cleaner > /dev/null 2>&1
 echo -e "\e[34mPACKAGES INSTALLED SUCCESSFULLY....[\e[92m✓\e[34m]\e[0m"
 sleep 3.0
-echo -e "\033[92m"
+echo -e "$red"
 center "INSTALLING  METASPLOIT"
 echo -e "\e[34mINSTALLING METASPLOIT....\e[0m"
 cd $HOME
@@ -89,6 +95,7 @@ bundle config build.nokogiri --use-system-libraries >/dev/null 2>&1
 bundle update >/dev/null 2>&1
 elif [[ $arc = "aarch64" ]];
 then
+echo -e "$red"
 center "INSTALLING REQUIREED PACKAGES"
 echo -e "\e[34mPACKAGES BEING INSTALLED WAIT....\e[0m"
 apt remove -y ruby >/dev/null 2>&1
@@ -132,6 +139,7 @@ mkdir -p $PREFIX/var/lib/postgresql >/dev/null 2>&1
 initdb $PREFIX/var/lib/postgresql  >/dev/null 2>&1
 echo -e "\e[34mMETASPLOIT \e[92m$ver\e[34m INSTALLED SUCCESSFULLY....[\e[92m✓\e[34m]\e[92m"
 sleep 3.0
+echo -e "$red"
 center "COMPLETING ALL PROCESS"
 cd $loc
 echo -e "\e[34mCOMPLETING WAIT.....\e[0m"
@@ -139,6 +147,7 @@ rm $ver.tar.gz >/dev/null 2>&1
 rm ruby.deb >/dev/null 2>&1
 echo -e "\e[34mCOMPLETED SUCCESSFULLY....[\e[92m✓\e[34m]\e[92m"
 sleep 3.0
+echo -e "$red"
 center "STARTING METASPLOIT"
 echo -e "\e[34mBOOTING UP WAIT.....\e[0m"
 echo -e "\e[34mTO START METASPLOIT TYPE (./msfconsole) INSIDE METASPLOIT FRAMEWORK\e[0m"
