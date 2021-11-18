@@ -135,6 +135,9 @@ bash fix-ruby-bigdecimal.sh.txt >/dev/null 2>&1
 cd $loc
 mkdir -p $PREFIX/var/lib/postgresql >/dev/null 2>&1
 initdb $PREFIX/var/lib/postgresql  >/dev/null 2>&1
+cd
+cd metasploit-framework
+bundle install
 echo -e "\e[34mMETASPLOIT \e[92m$ver\e[34m INSTALLED SUCCESSFULLY....[\e[92m✓\e[34m]\e[92m"
 sleep 3.0
 echo -e "$red"
